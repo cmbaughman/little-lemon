@@ -68,7 +68,7 @@ function Footer() {
                     <Link to="/about">About</Link>
                   </li>
                   <li>
-                    <Link to="/menu">Menu</Link>
+                    <Link to="/#menu">Menu</Link>
                   </li>
                   <li>
                     <HashLink smooth to="/booking#booking">

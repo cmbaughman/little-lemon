@@ -48,7 +48,7 @@ function Navbar() {
             </li>
             <li>
               <NavLink
-                smooth
+                smooth="true"
                 to="/reservation"
                 aria-label="On Click"
                 onClick={() => setIsNavActive(false)}

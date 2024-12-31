@@ -9,6 +9,7 @@ import { initializeTimes, updateTimes } from "../utils";
 
 export default function Main() {
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes())
+
   const [formData, setFormData] = useState({})
   const submitForm = (formData) => {
     window.submitAPI(formData) 

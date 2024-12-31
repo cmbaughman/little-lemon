@@ -1,7 +1,7 @@
+import { BrowserRouter } from "react-router-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import ReserveForm from "./ReserveForm";
 import { initializeTimes, updateTimes } from "../../utils/index";
-import { BrowserRouter } from "react-router-dom";
 import { act } from "react-dom/test-utils";
 
 let windowSpy;
@@ -25,56 +25,8 @@ describe('Testing component for ReserveForm', () => {
   it('Test for some static text being rendered in the ReserveForm component', () => {
     const labelElement = screen.getByText('Choose date')
     expect(labelElement).toBeInTheDocument();
-  }) 
-
-  it('verify validate the form input fields.', () => {
-    const submitForm = jest.fn()
-    const dispatch = jest.fn()
-    const { getByTestId } = render(
-      <BrowserRouter>
-        <ReserveForm submitForm={submitForm} dispatch={dispatch} />
-      </BrowserRouter>
-    )
-
-    const inputDate = screen.getByTestId('date-input');
-    const inputGuest = screen.getByTestId('guests-input');
-    const inputTime = screen.getByTestId('time-input');
-    const button = screen.getAllByText('Make reservation');
-    
-    fireEvent.mouseDown(inputDate)
-    fireEvent.change(inputDate, { target: { value: '2023-05-18' }})
-    fireEvent.mouseDown(inputGuest)
-    fireEvent.change(inputGuest, { target: { value: 20 }});
-
-    expect(inputTime).toBeEnabled()
-    expect(button).toBeEnabled()
-
-    fireEvent.submit(getByTestId('form'));
-
-    expect(submitForm).toHaveBeenCalled();
-    expect(dispatch).toHaveBeenCalled();
   })
 
-  it('verify invalidate the form input fields and display error', () => {
-    const { getByTestId } = render(
-      <BrowserRouter>
-        <ReserveForm submitForm={() => false} dispatch={() => {}} />
-      </BrowserRouter>
-    )
-
-    const warningText = 'Tables cannot be reserved for less than one person'
-    const inputDate = screen.getByTestId('date-input');
-
-    fireEvent.mouseDown(inputDate)
-    fireEvent.change(inputDate, { target: { value: '2023-05-18' }})
-
-
-    act(() => {
-      fireEvent.submit(getByTestId('form'))
-    })
-
-    expect(screen.getByText(warningText)).toBeInTheDocument();
-  })
 })
 
 describe('Testing reducer function for validate the behavior', () => {

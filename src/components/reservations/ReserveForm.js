@@ -18,7 +18,6 @@ function ReserveForm({ submitForm, availableTimes = [], dispatch }) {
   const [wasSubmitted, setWasSubmitted] = useState(false);
   const navigate = useNavigate()
 
-  const getIsFormValid = () => date && guests && time;
   const clearForm = () => {
     setTime('')
     setDate('')
@@ -60,7 +59,7 @@ function ReserveForm({ submitForm, availableTimes = [], dispatch }) {
       <input
         type="date"
         id="date"
-        data-testid="date-table"
+        data-testid="date-input"
         value={date}
         onChange={(e) => {
           setDate(e.target.value)
@@ -69,6 +68,7 @@ function ReserveForm({ submitForm, availableTimes = [], dispatch }) {
         aria-label="Choose a date"
         autoFocus
         aria-required="true"
+        required={true}
       />
       <label htmlFor="time">
         Select time<sup>*</sup>
@@ -81,6 +81,7 @@ function ReserveForm({ submitForm, availableTimes = [], dispatch }) {
         disabled={!date}
         aria-label="Select a time"
         aria-required="true"
+        required={true}
       >
         {availableTimes.map((available) => (
           <option key={available} value={available}>{available}</option>
@@ -99,6 +100,8 @@ function ReserveForm({ submitForm, availableTimes = [], dispatch }) {
         onChange={(e) => setGuests({ value: e.target.value })}
         aria-label="Number of guests"
         aria-required="true"
+        required={true}
+        min={1}
       />
 
       {wasSubmitted && Number(guests.value) < 1 ? <GuestsErrorMessage /> : null}
@@ -115,7 +118,7 @@ function ReserveForm({ submitForm, availableTimes = [], dispatch }) {
         <option value="Anniversary">Anniversary</option>
       </select>
 
-      <button type="submit" className="btn-form" disabled={!getIsFormValid()}>
+      <button type="submit" className="btn-form" >
         Make reservation
       </button>
     </form>
