@@ -1,7 +1,9 @@
+import Logo from '../images/Logo.svg'
 export default function Header() {
     return (
         <header>
-            This is the Header
+            <img src={Logo} alt="Little Lemon Restaurant"></img>
+            
         </header>
     )
 }
